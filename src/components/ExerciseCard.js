@@ -22,12 +22,12 @@ const ExerciseCard = ({ exercise }) => {
 					sx={{
 						ml: '21px',
 						color: '#fff',
-						background: '#ffa9a9',
+						background: '#FCC757',
 						fontSize: '14px',
 						borderRadius: '20px',
 						textTransform: 'capitalize',
 					}}>
-					{exercise.targetMuscle}
+					{exercise.target}
 				</Button>
 			</Stack>
 			<Typography
