@@ -9,6 +9,9 @@ import SimilarExercise from '../components/SimilarExercise';
 const ExerciseDetails = () => {
 	const [exerciseDetail, setExerciseDetail] = useState({});
 	const [exerciseVideos, setexerciseVideos] = useState([]);
+	const [targetMuscleExercises, setTargetMuscleExercises] = useState([]);
+	const [equipmentExercises, setEquipmentExercises] = useState([]);
+
 	const { id } = useParams();
 
 	useEffect(() => {
@@ -28,6 +31,18 @@ const ExerciseDetails = () => {
 				youtubeOptions
 			);
 			setexerciseVideos(exerciseVideoData.contents);
+
+			const targetExercisesData = await fetchData(
+				`${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
+				exerciseOptions
+			);
+			setTargetMuscleExercises(targetExercisesData);
+
+			const equipmentExercisesData = await fetchData(
+				`${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
+				exerciseOptions
+			);
+			setEquipmentExercises(equipmentExercisesData);
 		};
 
 		fetchExerciseData();
@@ -40,7 +55,10 @@ const ExerciseDetails = () => {
 				exerciseVideos={exerciseVideos}
 				name={exerciseDetail.name}
 			/>
-			<SimilarExercise />
+			<SimilarExercise
+				targetMuscleExercises={targetMuscleExercises}
+				equipmentExercises={equipmentExercises}
+			/>
 		</Box>
 	);
 };
